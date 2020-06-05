@@ -13,6 +13,9 @@
             body{
                 margin-top: 30px;
             }
+            .chat{
+                padding:15px;
+            }
             #messageArea{display: none;}
         </style>
     </head>
@@ -70,7 +73,7 @@
             })
 
             socket.on('new message',function(data){
-                $chat.append('<div class="well"><strong>'+data.user+'</strong> :'+data.msg+'</div>')
+                $chat.append('<div class="well"><strong>'+data.user+'</strong> : '+data.msg+'</div>')
             })
 
             $userForm.submit(function(e){
