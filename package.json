@@ -1,0 +1,26 @@
+{
+  "name": "group-chat",
+  "version": "1.0.0",
+  "description": "a group chat application using node.js + socket.io",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Gittss/group-chat.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Gittss/group-chat/issues"
+  },
+  "homepage": "https://github.com/Gittss/group-chat#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "socket.io": "^2.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
