@@ -1,13 +1,25 @@
 const express=require('express')
+const mongoose=require('mongoose')
 var app=express()
 var server=require('http').createServer(app)
 const io=require('socket.io').listen(server)
+const Chat=require('./models/chat')
+require('dotenv/config')
 var users=[]
 var connections=[]
 
+//-----------------DB Connection--------------------------
+mongoose.connect(process.env.MONGODB_URI,{useNewUrlParser:true, useUnifiedTopology:true},(err)=>{
+    if(!err) console.log('MongoDB connected')
+    else console.log('MongDB error : ',err)
+})
+
+//-----------------Server setup--------------------------
 server.listen(process.env.PORT || 3000,(err)=>{
     if(!err) console.log('Server running...')
 })
+
+//--------------------Routes-----------------------------
 
 app.get('/',(req,res)=>{
     res.sendFile(__dirname+'/index.html')
@@ -25,6 +37,15 @@ io.sockets.on('connection',socket =>{
     })
     
     socket.on('send message',data=>{
+        //--------saving messages into DB------
+        var chat=new Chat({
+            message:data,
+            sender:socket.username
+        })
+        chat.save((err)=>{
+            if(!err) console.log('Message saved : '+data)
+            else console.log(err)
+        })
         io.sockets.emit('new message',{msg: data, user:socket.username})
     })
 
@@ -34,6 +55,8 @@ io.sockets.on('connection',socket =>{
         users.push(socket.username)
         updateUsernames()
     })
+
+    
 
     function updateUsernames(){
         io.sockets.emit('get users',users)
