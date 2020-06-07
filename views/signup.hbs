@@ -1,0 +1,20 @@
+<div class="container">
+    <form action="/signup" method="POST">
+        <label>Username</label>
+        <input class="form-control" type="text" name="username" value="{{user.username}}" placeholder="enter username">
+        <div style="color: red;">
+            {{user.usernameError}}
+        </div>
+        <div style="color: red;">
+            {{username}}
+        </div>
+
+        <label>Password</label>
+        <input class="form-control" type="password" name="password" placeholder="create password">
+        <div style="color: red;">
+            {{user.passwordError}}
+        </div><br>
+
+        <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> Signup</button>
+    </form>
+</div>
